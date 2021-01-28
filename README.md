@@ -1,6 +1,29 @@
 # 版本说明
 
-解决 Worker 跨域问题版本，说明见http://ashita.top/tools/vue-pdf-co.html，注释掉node_modules/vue-pdf/src/vuePdfNoSss.vue 中，有一个 Worker 支持的判断，就不走 web worker 了，页面能够正常运行了；相对的，页面加载时间可能会变长，性能可能会降低；
+解决 Worker 跨域问题版本，说明见https://github.com/FranckFreiburger/vue-pdf/issues/25，注释掉`vuePdfNoSss.vue`文件中，
+`// var PdfjsWorker = require('worker-loader!pdfjs-dist/build/pdf.worker.js');`
+添加引用
+`import PdfjsWorker from 'pdfjs-dist/build/pdf.worker.js'`
+配置`vue.config.js`中 worker.js 编译
+
+```
+module.exports = {
+
+  chainWebpack(config) {
+    config.module
+      .rule('worker')
+      .test(/\.worker\.js$/)
+      .use('worker-loader').loader('worker-loader')
+      .options(
+        {
+          inline: true,
+          fallback: false
+        }
+        )
+      .end()
+  }
+}
+```
 
 # vue-pdf
 
