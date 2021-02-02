@@ -3,7 +3,7 @@
 
 	import componentFactory from './componentFactory.js'
  	// 修改部分：引入pdfjsworker
-	import PdfjsWorker from 'pdfjs-dist/build/pdf.worker.js'
+	import PdfjsWorker from 'pdfjs-dist/es5/build/pdf.worker.js'
 	if ( process.env.VUE_ENV !== 'server' ) {
 
 		var pdfjsWrapper = require('./pdfjsWrapper.js').default;
